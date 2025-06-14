@@ -28,8 +28,8 @@ const teamMembers = [
     },
   },
   {
-    name: 'أ. أحمد محمود',
-    position: 'المرشد الأكاديمي',
+    name: 'أ.محمد سمير',
+    position: 'استاذ اللغة العربية',
     image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg',
     social: {
       email: 'mailto:ahmad@alaqsaschool.edu',
@@ -39,8 +39,8 @@ const teamMembers = [
     },
   },
   {
-    name: 'د. فاطمة العلي',
-    position: 'رئيسة قسم العلوم',
+    name: 'ميادة محمد رشدي',
+    position: 'مشرفة المدرسة',
     image: 'https://images.pexels.com/photos/3796217/pexels-photo-3796217.jpeg',
     social: {
       email: 'mailto:fatima@alaqsaschool.edu',
