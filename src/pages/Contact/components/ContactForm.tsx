@@ -24,27 +24,18 @@ const ContactForm: React.FC = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus('submitting');
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setFormStatus('success');
-      setFormData({
-        name: '',
-        birthdate: '',
-        schoolYear: '',
-        grade: '',
-        parentName: '',
-        address: '',
-        whatsapp: '',
-      });
-      
-      // Reset form status after 3 seconds
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 1000);
+
+    // تكوين نص الرسالة من بيانات النموذج
+    const message = `\nالاسم: ${formData.name}\nتاريخ الميلاد: ${formData.birthdate}\nالسنة الدراسية: ${formData.schoolYear}\nالصف الدراسي: ${formData.grade}\nاسم ولي الأمر: ${formData.parentName}\nالعنوان: ${formData.address}\nرقم الواتس: ${formData.whatsapp}`;
+
+    // رقم الواتساب المطلوب (بدون صفر في البداية، مع كود الدولة)
+    const phone = "201122199303"; // 2 = كود مصر
+
+    // تكوين رابط واتساب
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    // فتح واتساب في نافذة جديدة
+    window.open(whatsappUrl, "_blank");
   };
   
   return (
