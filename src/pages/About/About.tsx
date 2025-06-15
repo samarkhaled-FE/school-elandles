@@ -5,7 +5,7 @@ import Button from '../../components/common/Button';
 import MissionVision from './components/MissionVision';
 import TeamSection from './components/TeamSection';
 import TimelineSection from './components/TimelineSection';
-import fiveSVG from '../../assets/animation/five.svg';
+import fiveSVG from 'src/assets/animation/five.svg';
 
 const About: React.FC = () => {
   return (

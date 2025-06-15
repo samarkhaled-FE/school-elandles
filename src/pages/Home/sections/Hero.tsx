@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import Button from '../../../components/common/Button';
+import fiveSVG from '../../../assets/animation/five.svg';
 
 const Hero: React.FC = () => {
   return (
@@ -65,7 +66,7 @@ const Hero: React.FC = () => {
           className="hidden lg:block w-1/2"
         >
           <img
-            src="/src/assets/animation/five.svg"
+            src={fiveSVG}
             alt="طلاب مدرسة الأندلس"
             className="max-w-md mx-auto animate-float rounded-lg shadow-2xl"
           />
