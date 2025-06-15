@@ -42,7 +42,7 @@ const About: React.FC = () => {
             >
               <div className="relative">
                 <img
-                  src={fiveSVG}
+                  src="/five.svg"
                   alt="مدرسة الأندلس"
                   className="rounded-lg shadow-lg w-full"
                 />
