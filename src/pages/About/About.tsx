@@ -5,7 +5,7 @@ import Button from '../../components/common/Button';
 import MissionVision from './components/MissionVision';
 import TeamSection from './components/TeamSection';
 import TimelineSection from './components/TimelineSection';
-import fiveSVG from '/public/five.svg';
+import fiveSVG from '../../assets/animation/five.svg';
 
 const About: React.FC = () => {
   return (
@@ -42,8 +42,8 @@ const About: React.FC = () => {
             >
               <div className="relative">
                 <img
-                  src="/five.svg"
-                  alt="مدرسة الأندلس"
+                  src={fiveSVG}
+                  alt="Animation"
                   className="rounded-lg shadow-lg w-full"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 rounded shadow-md">

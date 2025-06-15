@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { Users, BookOpen, Award, Building } from 'lucide-react';
 
 const stats = [
@@ -30,6 +30,14 @@ const stats = [
 ];
 
 const StatCounter: React.FC<{ value: number; duration: number }> = ({ value, duration }) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  React.useEffect(() => {
+    const controls = animate(count, value, { duration });
+    return controls.stop;
+  }, [value, duration]);
+
   return (
     <motion.span
       initial={{ opacity: 0 }}
@@ -37,15 +45,7 @@ const StatCounter: React.FC<{ value: number; duration: number }> = ({ value, dur
       viewport={{ once: true }}
       className="text-4xl md:text-5xl font-bold text-white"
     >
-      <motion.span
-        initial={{ counter: 0 }}
-        whileInView={{ counter: value }}
-        viewport={{ once: true }}
-        transition={{ duration: duration }}
-      >
-        {({ counter }) => Math.floor(counter)}
-      </motion.span>
-      +
+      <motion.span>{rounded}</motion.span>+
     </motion.span>
   );
 };

@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
         >
           <img
             src={fiveSVG}
-            alt="طلاب مدرسة الأندلس"
+            alt="Animation"
             className="max-w-md mx-auto animate-float rounded-lg shadow-2xl"
           />
         </motion.div>

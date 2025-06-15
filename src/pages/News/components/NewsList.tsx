@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Search, Calendar, User, ChevronLeft } from 'lucide-react';
 import { RootState } from '../../../redux/store';
 import courseImg from '../../../assets/images/دورةمكثفة.jfif';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = {
   hidden: { opacity: 0 },
@@ -72,80 +73,82 @@ const NewsList: React.FC = () => {
   }, [news]);
   
   return (
-    <div>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
-          أحدث الأخبار والفعاليات
-        </h2>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
+            أحدث الأخبار والفعاليات
+          </h2>
+          
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="ابحث في الأخبار..."
+              value={searchTerm}
+              onChange={handleSearch}
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full md:w-64"
+            />
+            <Search size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+        </div>
         
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="ابحث في الأخبار..."
-            value={searchTerm}
-            onChange={handleSearch}
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full md:w-64"
-          />
-          <Search size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        </div>
+        {filteredNews.length === 0 ? (
+          <div className="bg-gray-50 p-8 rounded-lg text-center">
+            <p className="text-gray-600 text-lg">لا توجد أخبار تطابق بحثك. حاول استخدام كلمات بحث مختلفة.</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            {filteredNews.map((newsItem) => (
+              <motion.div key={newsItem.id} variants={item} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="md:col-span-1">
+                    <div className="h-full relative overflow-hidden">
+                      <img
+                        src={newsItem.image}
+                        alt={newsItem.title}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 p-6">
+                    <div className="flex items-center text-gray-500 text-sm mb-3">
+                      <div className="flex items-center ml-4">
+                        <Calendar size={14} className="ml-1" />
+                        <span>{formatDate(newsItem.date)}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <User size={14} className="ml-1" />
+                        <span>{newsItem.author}</span>
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-3 text-gray-800 hover:text-primary transition-colors">
+                      <Link to={`/news/${newsItem.id}`}>{newsItem.title}</Link>
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-4">{newsItem.summary}</p>
+                    
+                    <Link
+                      to={`/news/${newsItem.id}`}
+                      className="text-primary font-bold flex items-center hover:underline"
+                    >
+                      اقرأ المزيد
+                      <ChevronLeft size={16} className="mr-1" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
-      
-      {filteredNews.length === 0 ? (
-        <div className="bg-gray-50 p-8 rounded-lg text-center">
-          <p className="text-gray-600 text-lg">لا توجد أخبار تطابق بحثك. حاول استخدام كلمات بحث مختلفة.</p>
-        </div>
-      ) : (
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="space-y-8"
-        >
-          {filteredNews.map((item) => (
-            <motion.div key={item.id} variants={item} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="md:col-span-1">
-                  <div className="h-full relative overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                </div>
-                <div className="md:col-span-2 p-6">
-                  <div className="flex items-center text-gray-500 text-sm mb-3">
-                    <div className="flex items-center ml-4">
-                      <Calendar size={14} className="ml-1" />
-                      <span>{formatDate(item.date)}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <User size={14} className="ml-1" />
-                      <span>{item.author}</span>
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-3 text-gray-800 hover:text-primary transition-colors">
-                    <Link to={`/news/${item.id}`}>{item.title}</Link>
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-4">{item.summary}</p>
-                  
-                  <Link
-                    to={`/news/${item.id}`}
-                    className="text-primary font-bold flex items-center hover:underline"
-                  >
-                    اقرأ المزيد
-                    <ChevronLeft size={16} className="mr-1" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      )}
-    </div>
+    </BrowserRouter>
   );
 };
 
