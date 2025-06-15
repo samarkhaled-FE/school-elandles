@@ -29,6 +29,7 @@ const CoursesList: React.FC = () => {
   const { courses } = useSelector((state: RootState) => state.courses);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState(courses);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -94,9 +95,12 @@ const CoursesList: React.FC = () => {
                   className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <Link to={`/courses/${course.id}`} className="text-white font-bold">
-                    عرض التفاصيل
-                  </Link>
+                  <button
+                    className="text-white font-bold focus:outline-none"
+                    onClick={() => setExpandedId(expandedId === course.id ? null : course.id)}
+                  >
+                    {expandedId === course.id ? 'إخفاء التفاصيل' : 'عرض التفاصيل'}
+                  </button>
                 </div>
               </div>
               <div className="p-5">
@@ -118,11 +122,24 @@ const CoursesList: React.FC = () => {
                     <span>{course.level}</span>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <Link to={`/courses/${course.id}`}>
-                    <Button variant="primary" fullWidth>عرض التفاصيل</Button>
-                  </Link>
-                </div>
+                {expandedId === course.id && (
+                  <div className="mt-4 bg-gray-50 rounded p-4 border text-sm text-gray-700 animate-fade-in">
+                    <p><span className="font-bold">وصف المادة:</span> {course.description}</p>
+                    <p className="mt-2"><span className="font-bold">المعلم المسؤول:</span> {course.teacher}</p>
+                    <p className="mt-2"><span className="font-bold">الجدول الزمني:</span> {course.duration}</p>
+                    <p className="mt-2"><span className="font-bold">المستوى:</span> {course.level}</p>
+                    {course.lessons && (
+                      <div className="mt-2">
+                        <span className="font-bold">الدروس/الوحدات:</span>
+                        <ul className="list-disc pr-5 mt-1">
+                          {course.lessons.map((lesson, i) => (
+                            <li key={i}>{lesson}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

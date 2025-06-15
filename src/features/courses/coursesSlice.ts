@@ -8,6 +8,7 @@ export interface Course {
   teacher: string;
   duration: string;
   level: string;
+  lessons?: string[];
 }
 
 interface CoursesState {
@@ -26,6 +27,12 @@ const initialState: CoursesState = {
       teacher: 'أ. أحمد محمد',
       duration: '3 أشهر',
       level: 'مبتدئ',
+      lessons: [
+        'الوحدة الأولى: الحروف والكلمات',
+        'الوحدة الثانية: الجمل والتراكيب',
+        'الوحدة الثالثة: القراءة والفهم',
+        'الوحدة الرابعة: التعبير والإنشاء',
+      ],
     },
     {
       id: '2',
@@ -35,6 +42,11 @@ const initialState: CoursesState = {
       teacher: 'د. سارة أحمد',
       duration: '4 أشهر',
       level: 'متوسط',
+      lessons: [
+        'الأعداد والعمليات الحسابية',
+        'الجبر والهندسة',
+        'الإحصاء والاحتمالات',
+      ],
     },
     {
       id: '3',
@@ -44,6 +56,11 @@ const initialState: CoursesState = {
       teacher: 'د. محمد علي',
       duration: '5 أشهر',
       level: 'متقدم',
+      lessons: [
+        'الكائنات الحية',
+        'المادة والطاقة',
+        'البيئة والتوازن البيئي',
+      ],
     },
     {
       id: '4',
@@ -53,6 +70,11 @@ const initialState: CoursesState = {
       teacher: 'أ. عمر خالد',
       duration: '3 أشهر',
       level: 'مبتدئ',
+      lessons: [
+        'العصر النبوي',
+        'الخلافة الراشدة',
+        'الدولة الأموية والعباسية',
+      ],
     },
   ],
   status: 'idle',
