@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Facebook, Twitter, Instagram, Mail } from 'lucide-react';
 import SectionTitle from '../../../components/common/SectionTitle';
 import mangerImg from '../../../assets/images/manger.jpg';
+import teacherImg from '../../../assets/images/teacher.png';
 
 const teamMembers = [
   {
@@ -41,7 +42,7 @@ const teamMembers = [
   {
     name: 'ميادة محمد رشدي',
     position: 'مشرفة المدرسة',
-    image: 'https://images.pexels.com/photos/3796217/pexels-photo-3796217.jpeg',
+    image: teacherImg,
     social: {
       email: 'mailto:fatima@alaqsaschool.edu',
       facebook: '#',
